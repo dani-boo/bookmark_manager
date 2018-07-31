@@ -5,4 +5,3 @@ feature 'Viewing bookmarks' do
     expect(page).to have_content 'http://www.youtube.com'
   end
 end
-   
