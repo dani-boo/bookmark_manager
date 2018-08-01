@@ -1,4 +1,4 @@
- #Bookmark Manager#
+ Bookmark Manager
  
  Show a list of bookmarks 
  
