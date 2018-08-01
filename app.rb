@@ -1,3 +1,4 @@
+# Carry on here in Walkthrough: We can now flesh out the route, saving the submitted data to the database:
 # Controller class
 require 'sinatra/base'
 require './lib/bookmark'
@@ -8,9 +9,17 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/bookmarks' do
-    p ENV
+    # p ENV
     @bookmarks = Bookmark.all
     erb :index
+  end
+
+  get '/bookmarks/new' do
+    erb :"bookmarks/new"
+  end
+
+  post '/bookmarks' do
+    p "Form data submitted to the /bookmarks route!"
   end
 
   run! if app_file == $0
