@@ -1,9 +1,12 @@
-# Carry on here in Walkthrough: We can now flesh out the route, saving the submitted data to the database:
-# Controller class
 require 'sinatra/base'
+require 'sinatra/flash'
 require './lib/bookmark'
+require 'uri'
 
 class BookmarkManager < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
+
   get '/' do
     redirect '/bookmarks'
   end
@@ -19,8 +22,12 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks' do
-    Bookmark.create(url: params['url'])
-    redirect '/bookmarks'
+    if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
+      Bookmark.create(url: params['url'])
+    else
+      flash[:notice] = "Please submit a valid URL"
+    end
+      redirect '/bookmarks'
   end
 
   run! if app_file == $0
