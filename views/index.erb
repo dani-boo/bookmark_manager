@@ -1,6 +1,10 @@
 <ol>
   <%= flash[:notice] %>
   <% @bookmarks.each do |bookmark|  %>
-  <li><%= bookmark %></li>
+    <li id="bookmark-<%= bookmark.id %>">
+      <a href="<%= bookmark.url %>" target="_blank">
+        <%= bookmark.title %>
+      </a>
+    </li>
   <% end %>
 </ol>

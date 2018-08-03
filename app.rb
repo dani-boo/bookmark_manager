@@ -23,7 +23,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/bookmarks' do
     if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
-      Bookmark.create(url: params['url'])
+      Bookmark.create(url: params['url'], title: params['title'])
     else
       flash[:notice] = "Please submit a valid URL"
     end
