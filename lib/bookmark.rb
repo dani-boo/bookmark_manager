@@ -26,12 +26,19 @@ class Bookmark
     else
       connection = PG.connect(dbname: 'bookmark_manager')
     end
-  
+    
+    return false unless is_url?(options[:url])
     result = connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{options[:url]}', '#{options[:title]}') RETURNING id, url, title")
     Bookmark.new(result.first['id'], result.first['url'], result.first['title'])
   end
 
-  def ==(other)
-    @id == other.id
+  def ==(match)
+    @id == match.id
+  end
+
+  private
+
+  def self.is_url?(url)
+    url =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
 end

@@ -25,6 +25,12 @@ describe Bookmark do
 
       expect(Bookmark.all).to include bookmark
     end
+
+    # it 'doesn\'t create a bookmark if URL is invalid' do
+    #   fakebookmark = Bookmark.create(url: 'bullshit')
+
+    #   expect(Bookmark.all).not_to include(fakebookmark)
+    # end
   end
 
   describe '#==' do
